@@ -1,7 +1,9 @@
 package org.example.Abstract_heroes;
+
 import org.example.Arena;
 import org.example.GameInterface;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -24,7 +26,7 @@ public abstract class Hero implements GameInterface {
     /**
      * Здоровье персонажа сейчас
      */
-    protected int health;
+    public int health;
 
     /**
      * Здоровье персонажа максимальный уровень
@@ -35,13 +37,31 @@ public abstract class Hero implements GameInterface {
      * Поле
      */
     protected Arena arena;
+    /**
+     * Инициатива
+     */
+    public  int initiative;
 
 
     static {
         Hero.number = 0;
         Hero.r = new Random();
     }
-    public Hero(int health, int x, int y) {
+
+
+
+    public Hero(int initiative, int health, int x, int y) {
+        String name=getName();
+        this.name = name;
+        this.health = health;
+        this.maxHealth = health;
+        this.initiative=initiative;
+        this.arena=new Arena(x,y);
+
+
+    }
+
+    public Hero( int health, int x, int y) {
         String name=getName();
         this.name = name;
         this.health = health;
@@ -50,13 +70,14 @@ public abstract class Hero implements GameInterface {
 
     }
 
-    public Hero(int x, int y) {
-        this(Hero.r.nextInt(100, 200), x, y);
+    public Hero( int x, int y) {
+
+        this( Hero.r.nextInt(100, 200), x, y);
     }
 
     public String getInfo() {
-        return String.format("Имя: %s  Здоровье: %d  Тип: %s  x: %s ; y: %s",
-                this.name, this.health, this.getClass().getSimpleName(),arena.x, arena.y);
+        return String.format("Имя: %s  Здоровье: %d Инициатива: %d Тип: %s  x: %s ; y: %s",
+                this.name, this.health, this.initiative, this.getClass().getSimpleName(),arena.x, arena.y);
     }
 
     public void healed(int Hp) {
@@ -69,30 +90,37 @@ public abstract class Hero implements GameInterface {
         return s;
     }
 
-    public void step(){
-        System.out.printf(getInfo()+"-ПОХОДИЛ");
+    public void step(List<Hero> teams1, List<Hero> teams2){
+        System.out.println("ПОХОДИЛ: ");
+        System.out.println(getInfo());
+        die();
+        System.out.println("________________________________________");
+
 
     }
-    public void die(){
-        if (health==0){
-           System.out.printf(getInfo()+"-УМЕР");
+    public void die(Hero hero){
+        if (hero.health==0){
+           System.out.printf(hero.getInfo()+"-УМЕР");
         }
 
     }
 
-    public void getDamage(int damage) {
-    }
-    public void getPosition(String name1, String name2){
-        int x1=this.arena.x;
-        int x2=this.arena.x;
-        int y1=this.arena.y;
-        int y2=this.arena.y;
-        double xy = arena.getXY(x1, x2, y1, y2);
+    public Arena getCoordinates() {
+        return arena;
     }
 
-    public void getConfederate(List<Hero> team1, List<Hero> team2){
-
+    protected Hero findNearest(ArrayList<Hero> team) {
+        Hero nearest = team.get(0);
+        for (Hero hero : team) {
+            if (arena.getDistance(hero.getCoordinates()) < arena.getDistance(nearest.getCoordinates())) {
+                nearest = hero;
+            }
+        }
+        return nearest;
     }
 
 
+    public abstract void getDamage(int damage);
+
+    public abstract void attack();
 }

@@ -20,6 +20,7 @@ public abstract class Magical_Heroes extends Hero implements GameInterface {
         this.name=name;
         this.health=health;
 
+
     }
 
 
@@ -27,4 +28,6 @@ public abstract class Magical_Heroes extends Hero implements GameInterface {
         super(x,y);
 
     }
+
+    public abstract void attack();
 }
