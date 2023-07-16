@@ -1,6 +1,7 @@
 package org.example.All_Other_heroes;
 
 import org.example.Abstract_heroes.Hero;
+import org.example.Abstract_heroes.Status;
 
 import java.util.ArrayList;
 
@@ -13,6 +14,8 @@ public class Farmer extends Hero {
 
     @Override
     public void step(ArrayList<Hero> teamFoe, ArrayList<Hero> teamFriend) {
+        if (this.isDead()) return;
+        status = Status.READY;
 
     }
 

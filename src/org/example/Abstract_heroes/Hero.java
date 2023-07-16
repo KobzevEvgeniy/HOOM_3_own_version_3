@@ -35,7 +35,7 @@ public abstract class Hero implements GameInterface {
     public int maxHealth;
 
 
-    protected  Status status;
+    public   Status status;
     /**
      * Поле
      */
@@ -122,6 +122,14 @@ public abstract class Hero implements GameInterface {
         }
         return nearest;
     }
+        protected ArrayList<Hero> findLiveHero(ArrayList<Hero> team) {
+            ArrayList<Hero> notDeadTeamMembers = new ArrayList<>();
+            for (Hero c: team) {
+                if (!c.isDead()) notDeadTeamMembers.add(c);
+            }
+            return notDeadTeamMembers;
+    }
+
 
 
     public  void getDamage(int damage){
