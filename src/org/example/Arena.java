@@ -19,12 +19,6 @@ public  class Arena {
     }
 
 
-    public double getDistance(int x1, int y1, int x2, int y2){
-        return Math.sqrt(Math.pow((x1-x2),2)+Math.pow((y1-y2),2));
-    }
-
-
-
         @Override
         public String toString() {
             return String.format("x: %d, y: %d", x, y);
@@ -34,7 +28,26 @@ public  class Arena {
             return (int) Math.sqrt(Math.pow(x - targetPosition.getPosition()[0], 2) +
                     Math.pow(y - targetPosition.getPosition()[1], 2));
         }
-
+    public String getDirection(Arena otherCoordinates) {
+        int[] my = this.getPosition();
+        int[] other = otherCoordinates.getPosition();
+        if (Math.abs(my[0] - other[0]) > Math.abs(my[1] - other[1])) {
+            if (my[0] > other[0]) {
+                return "left";
+            } else {
+                return "right";
+            }
+        } else {
+            if (my[1] > other[1]) {
+                return "forward";
+            } else {
+                return "back";
+            }
+        }
+    }
+    public boolean isEqual(Arena coordinates) {
+        return this.x == coordinates.x && this.y == coordinates.y;
+    }
 
 
 }

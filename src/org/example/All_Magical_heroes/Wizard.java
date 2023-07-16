@@ -1,11 +1,11 @@
 package org.example.All_Magical_heroes;
 import org.example.Abstract_heroes.Hero;
 import org.example.Abstract_heroes.Magical_Heroes;
-import org.example.All_Warriors_heroes.Attack;
+import org.example.Abstract_heroes.Status;
 
 import java.util.ArrayList;
 
-public class Wizard extends Magical_Heroes implements Healing, Attack {
+public class Wizard extends Magical_Heroes {
 
 
     private int damage;
@@ -16,6 +16,7 @@ public class Wizard extends Magical_Heroes implements Healing, Attack {
         this.name = getName();
         this.mana = 120;
         this.initiative=15;
+        this.status= Status.READY;
 
     }
 
@@ -25,12 +26,7 @@ public class Wizard extends Magical_Heroes implements Healing, Attack {
     }
 
     public String getInfo() {
-        return String.format("Колдун %s  Манна: %d Сила урона: %s", super.getInfo(), this.mana, this.damage);
-    }
-
-    @Override
-    public void getDamage(int damage) {
-
+        return String.format("Колдун %s  Манна: %d \uD83D\uDC80: %s", super.getInfo(), this.mana, this.damage);
     }
 
     @Override
@@ -38,26 +34,7 @@ public class Wizard extends Magical_Heroes implements Healing, Attack {
 
     }
 
-    @Override
-    public void healing(Hero target) {
 
-    }
-
-
-    @Override
-    public void attack(Hero target) {
-
-    }
-
-    @Override
-    public void getDamage() {
-
-    }
-
-    @Override
-    public void attack() {
-
-    }
 }
 
 

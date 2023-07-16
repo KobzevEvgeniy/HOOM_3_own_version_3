@@ -23,6 +23,7 @@ public abstract class Hero implements GameInterface {
      */
     protected String name;
 
+
     /**
      * Здоровье персонажа сейчас
      */
@@ -31,8 +32,10 @@ public abstract class Hero implements GameInterface {
     /**
      * Здоровье персонажа максимальный уровень
      */
-    protected int maxHealth;
+    public int maxHealth;
 
+
+    protected  Status status;
     /**
      * Поле
      */
@@ -57,6 +60,7 @@ public abstract class Hero implements GameInterface {
         this.maxHealth = health;
         this.initiative=initiative;
         this.arena=new Arena(x,y);
+        this.status=Status.READY;
 
 
     }
@@ -76,12 +80,12 @@ public abstract class Hero implements GameInterface {
     }
 
     public String getInfo() {
-        return String.format("Имя: %s  Здоровье: %d Инициатива: %d Тип: %s  x: %s ; y: %s",
-                this.name, this.health, this.initiative, this.getClass().getSimpleName(),arena.x, arena.y);
+        return String.format(": %s  \u2764: %d Инициатива⚔\uFE0F:%d    Тип: %s    x: %s ; y: %s СТАТУС: %s",
+                this.name, this.health, this.initiative, this.getClass().getSimpleName(),arena.x, arena.y, this.status);
     }
 
-    public void healed(int Hp) {
-        this.health = Hp + this.health > this.maxHealth ? this.maxHealth : Hp+ this.health;
+    public void healed(int health) {
+        this.health = health + this.health > this.maxHealth ? this.maxHealth : health+ this.health;
     }
 
 
@@ -91,7 +95,7 @@ public abstract class Hero implements GameInterface {
     }
 
     public void step(List<Hero> teams1, List<Hero> teams2){
-        System.out.println("ПОХОДИЛ: ");
+        System.out.println("MOVE");
         System.out.println(getInfo());
         die();
         System.out.println("________________________________________");
@@ -100,7 +104,7 @@ public abstract class Hero implements GameInterface {
     }
     public void die(Hero hero){
         if (hero.health==0){
-           System.out.printf(hero.getInfo()+"-УМЕР");
+           System.out.printf(hero.getInfo()+Status.DEAD);
         }
 
     }
@@ -120,7 +124,30 @@ public abstract class Hero implements GameInterface {
     }
 
 
-    public abstract void getDamage(int damage);
+    public  void getDamage(int damage){
+        health-=damage;
+        if (health<=0){
+            this.status=Status.DEAD;
+            health=0;
+        }
+        if (health>0) health=maxHealth;
+    }
 
-    public abstract void attack();
+    public Status getStatus(Hero hero){
+        return Hero.this.status;
+    }
+
+    public int getHp(Hero hero) {
+        return hero.health;
+    }
+
+    public boolean isDead() {
+        return status.equals(Status.DEAD);
+    }
+
+    public void getHealing(int healPoints) {
+        health += healPoints;
+        if (health > maxHealth) health = maxHealth;
+    }
+
 }

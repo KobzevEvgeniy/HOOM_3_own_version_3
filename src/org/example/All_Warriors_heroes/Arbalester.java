@@ -26,8 +26,8 @@ protected int arrows;
     }
 
     public String getInfo() {
-        return String.format("Арбалетчик %s  Сила урона: %s Защита: %s Меткость: %s Инициатива: %s, Стрел: %s",
-                super.getInfo(),  this.damage, this.protection, this.accuracy, this.initiative, this.arrows);
+        return String.format("Арбалетчик %s  \uD83D\uDC80: %s Защита: %s Меткость: %s  Стрел: %s",
+                super.getInfo(),  this.damage, this.protection, this.accuracy,  this.arrows);
     }
 
     @Override
@@ -41,21 +41,6 @@ protected int arrows;
     }
 
 
-    @Override
-    public void attack(Hero target) {
 
-            int damage = Hero.r.nextInt(10, 20);
-            target.getDamage(damage);
-        }
-
-    @Override
-    public void getDamage() {
-
-    }
-
-    @Override
-    public void attack() {
-
-    }
 }
 

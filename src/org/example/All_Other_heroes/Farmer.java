@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 public class Farmer extends Hero {
     public Farmer(int x, int y) {
-        super(Hero.r.nextInt(100, 200), x,y);
-        this.initiative=1;
+        super(Hero.r.nextInt(100, 200), x, y);
+        this.initiative = 1;
 
     }
 
@@ -16,9 +16,10 @@ public class Farmer extends Hero {
 
     }
 
+    @Override
     public String getInfo() {
-        return String.format("Фермер Имя: %s  Здоровье: %d  Тип: %s",
-                this.name, this.health, this.getClass().getSimpleName());
+        return String.format("Фермер : %s  \u2764: %d  Тип: %s Инициатива⚔\uFE0F:%d ",
+                this.name, this.health, this.getClass().getSimpleName(), this.initiative);
     }
 
     @Override
@@ -28,11 +29,6 @@ public class Farmer extends Hero {
 
     @Override
     public void die() {
-
-    }
-
-    @Override
-    public void attack() {
 
     }
 }
