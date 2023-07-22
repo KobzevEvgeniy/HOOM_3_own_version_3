@@ -1,7 +1,6 @@
 package org.example.View;
 
 
-
 import org.example.Abstract_heroes.Hero;
 import org.example.Program;
 
@@ -29,10 +28,10 @@ public class View {
                 .replace('i', '\u2518')
                 .replace('-', '\u2500');
     }
-    private static String getChar(int x, int y){
+    private static String getChar(int row, int col){
         String out = "| ";
-        for (Hero human: Program.team) {
-            if (human.getCoordinates().getPosition()[0] == x && human.getCoordinates().getPosition()[1] == y){
+        for (Hero human: Program.allTeam) {
+            if (human.getCoordinates().toArray()[0] == row && human.getCoordinates().toArray()[1] == col){
                 if (human.isDead()){
                     out = "|" + (AnsiColors.ANSI_RED + human.toString().charAt(0) + AnsiColors.ANSI_RESET);
                     break;
@@ -51,15 +50,14 @@ public class View {
             System.out.print(AnsiColors.ANSI_YELLOW+ "Step " + step + AnsiColors.ANSI_RESET);
         }
         step++;
-        Program.team.forEach((v) -> l[0] = Math.max(l[0], v.getInfo().length()));
+        Program.allTeam.forEach((v) -> l[0] = Math.max(l[0], v.getInfo().length()));
         System.out.print("_".repeat(l[0]*2));
         System.out.println("");
         System.out.print(top10 + "    ");
-        System.out.print(AnsiColors.ANSI_GREEN+":\tGreen side"+ AnsiColors.ANSI_RESET);
-
+        System.out.print(AnsiColors.ANSI_GREEN+":\tGreen side"+AnsiColors.ANSI_RESET);
         //for (int i = 0; i < l[0]-9; i++)
         System.out.print(" ".repeat(l[0]-9));
-        System.out.println(AnsiColors.ANSI_BLUE+"Blue side"+ AnsiColors.ANSI_RESET);
+        System.out.println(AnsiColors.ANSI_BLUE+"Blue side"+AnsiColors.ANSI_RESET);
         for (int i = 1; i < 11; i++) {
             System.out.print(getChar(1, i));
         }

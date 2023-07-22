@@ -1,37 +1,19 @@
 package org.example.All_Other_heroes;
-
 import org.example.Abstract_heroes.Hero;
-import org.example.Abstract_heroes.Status;
+import org.example.Abstract_heroes.Names;
+import org.example.Abstract_heroes.States;
 
 import java.util.ArrayList;
 
 public class Farmer extends Hero {
-    public Farmer(int x, int y) {
-        super(Hero.r.nextInt(100, 200), x, y);
-        this.initiative = 1;
 
+    public Farmer(Names name, int row, int col) {
+        super(name, 4, 4, 1, 1, 1, row, col);
     }
 
     @Override
-    public void step(ArrayList<Hero> teamFoe, ArrayList<Hero> teamFriend) {
+    public void step(ArrayList<Hero> team, ArrayList<Hero> team2){
         if (this.isDead()) return;
-        status = Status.READY;
-
-    }
-
-    @Override
-    public String getInfo() {
-        return String.format("Фермер : %s  \u2764: %d  Тип: %s Инициатива⚔\uFE0F:%d ",
-                this.name, this.health, this.getClass().getSimpleName(), this.initiative);
-    }
-
-    @Override
-    public void getDamage(int damage) {
-
-    }
-
-    @Override
-    public void die() {
-
+        state = States.READY;
     }
 }

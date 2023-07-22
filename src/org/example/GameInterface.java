@@ -9,7 +9,6 @@ public interface GameInterface {
         String getInfo();
 
 
-    void die();
 
 }
 

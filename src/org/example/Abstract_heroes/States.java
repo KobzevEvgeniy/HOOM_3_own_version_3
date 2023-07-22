@@ -1,7 +1,7 @@
 package org.example.Abstract_heroes;
 
 
-public enum Status {
+public enum States {
     READY,
     NOAMMO,
     DEAD,
